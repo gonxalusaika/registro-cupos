@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
+import {Grid,Row} from 'react-bootstrap'
+import Header from './components/header.js'
 import './App.css'
+import Routes from './Routes';
 class App extends Component {
   state = {
     cow: '',
@@ -17,10 +20,10 @@ fetchCow = async () => {
 customCow = async evt => {
     //evt.preventDefault()
     const text = this.state.text
-    const response = await fetch(`/api/cow/${text}`)
-    const custom = await response.json()
-    const cow = custom.moo
-    this.setState({ cow })
+    //const response = await fetch(`/api/cow/${text}`)
+    //const custom = await response.json()
+    //const cow = custom.moo
+    //this.setState({ cow })
   }
 handleChange = evt => {
     this.setState({ [evt.target.name]: evt.target.value })
@@ -30,19 +33,12 @@ handleChange = evt => {
 render() {
     return (
       <div className="App">
-        <h3>Text Cow. Moo</h3>
-        <code>{this.state.cow}</code>
-        {/* <form onSubmit={this.customCow}> */}
-        <form >
-          <label>Custom Cow Text:</label>
-          <input
-            type="text"
-            name="text"
-            value={this.state.text}
-            onChange={this.handleChange}
-          />
-          {/* <button type="submit">Show me a talking cow!</button> */}
-        </form>
+        <Header />
+        <Grid>
+          <Row>
+           <Routes />
+          </Row>
+        </Grid>
       </div>
     )
   }
