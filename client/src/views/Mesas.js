@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Row, Col} from 'react-bootstrap';
 import MesaItem from '../components/MesaItem';
+import Modelo from '../Modelo';
 
 const mesas = [
     {
@@ -35,18 +36,24 @@ const mesas = [
     }
 ]
 
-class Mesas extends Component {    
-    render() {
-        var mesasItems = mesas.map((mesa) => 
-            <Col xs={12} md={6}>
-                <MesaItem {...mesa} />
-            </Col>);
+class Mesas extends Component {
+  onComponentDidMount() {
+    this.setState({mesas: Modelo.mesas});
+  }
+  seleccionarMesa(mesa) {
+    //if (Modelo.mesasSeleccionadas.)
+  }  
+  render() {
+      var mesasItems = this.state.mesas.map((mesa) => 
+          <Col xs={12} md={6}>
+              <MesaItem {...mesa} />
+          </Col>);
 
-        return (
-        <Row>
-            {mesasItems}
-        </Row>);
-    }
+      return (
+      <Row>
+          {mesasItems}
+      </Row>);
+  }
 }
 
 export default Mesas;
