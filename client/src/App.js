@@ -9,7 +9,7 @@ class App extends Component {
     text: ''
   }
 componentDidMount() {
-    this.fetchCow()
+    //this.fetchCow()
   }
 fetchCow = async () => {
     const response = await fetch(`/api/cow`)

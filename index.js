@@ -19,14 +19,14 @@ app.use('/api', controller);
 //   }
 // })
 // // Serve our base route that returns a Hello World cow
-// app.get('/api/cow/', cors(), async (req, res, next) => {
-//   try {
-//     const moo = cowsay.say({ text: 'Hello World!' })
-//     res.json({ moo })
-//   } catch (err) {
-//     next(err)
-//   }
-// })
+app.get('/api/cow/', cors(), (req, res, next) => {
+  try {
+    const moo = cowsay.say({ text: 'Hello World!' })
+    res.json({ moo })
+  } catch (err) {
+    next(err)
+  }
+})
 // Choose the port and start the server
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
