@@ -1,15 +1,28 @@
-import Sequelize from 'sequelize';
+const Sequelize =  require('sequelize');
 
-const sequelize = new Sequelize('registro', 'username', 'password', {
-  host: 'localhost',
-  dialect: 'postgres',
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000
-  }
-});
+let sequelize;
+if (process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
+  // the application is executed on Heroku ... use the postgres database
+  sequelize = new Sequelize(process.env.HEROKU_POSTGRESQL_BRONZE_URL, {
+    dialect:  'postgres',
+    protocol: 'postgres',
+    port:     match[4],
+    host:     match[3],
+    logging:  true //false
+  })
+}
+else {
+  sequelize = new Sequelize('registro', 'postgres', 'postgres', {
+      host: 'localhost',
+      dialect: 'postgres',
+      pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+      }
+  });
+}
 
 const Interesado = sequelize.define('interesado', {
   nombre: {
@@ -32,12 +45,19 @@ const Mesa = sequelize.define('mesa', {
 const Inscripcion = sequelize.define('inscripcion', {
 
 });
-Inscripcion.hasOne(Interesado);
-Inscripcion.hasOne(Mesa);
+Mesa.hasMany(Inscripcion);
+Interesado.hasMany(Inscripcion);
+//Inscripcion.belongsTo(Interesado);
+//Inscripcion.belongsTo(Mesa);
 
-export default {
-  sequelize: sequelize,
-  Interesado: Interesado,
-  Mesa: Mesa,
-  Inscripcion: Inscripcion
+sequelize.sync({force: false})
+  .then(() => {
+    console.log('Base de datos creada');
+  });
+
+module.exports = {
+  sequelize,
+  Interesado,
+  Mesa,
+  Inscripcion
 }
