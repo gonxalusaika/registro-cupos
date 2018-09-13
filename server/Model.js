@@ -49,8 +49,8 @@ const Inscripcion = sequelize.define('inscripcion', {
 });
 Mesa.hasMany(Inscripcion);
 Interesado.hasMany(Inscripcion);
-//Inscripcion.belongsTo(Interesado);
-//Inscripcion.belongsTo(Mesa);
+Inscripcion.belongsTo(Interesado);
+Inscripcion.belongsTo(Mesa);
 
 sequelize.sync({force: false})
   .then(() => {
