@@ -3,13 +3,14 @@ import {Grid,Row} from 'react-bootstrap'
 import Header from './components/header.js'
 import './App.css'
 import Routes from './Routes';
+import Relleno from './components/relleno';
 class App extends Component {
   state = {
     cow: '',
     text: ''
   }
 componentDidMount() {
-    //this.fetchCow()
+     
   }
 fetchCow = async () => {
     const response = await fetch(`/api/cow`)
@@ -33,6 +34,7 @@ handleChange = evt => {
 render() {
     return (
       <div className="App">
+        <Relleno />
         <Header />
         <Grid>
           <Row>

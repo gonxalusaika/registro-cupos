@@ -2,8 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2em;
-  white-space: pre
+  margin-top: 0em;
+  white-space: pre;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 .App code {
   margin: 2em;
@@ -40,4 +42,13 @@ input {
   margin-top: 1em;
   margin-bottom: 1em;
   border: 1px solid grey
+}
+fondo {
+  z-index: 0;
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 750px;
+  }
 }
