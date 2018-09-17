@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {Button, Col, Row} from 'react-bootstrap';
+import {Button, Col, Row, Grid} from 'react-bootstrap';
 
 const letraGrandeStyle = {
     fontSize: '7rem',
@@ -30,12 +30,12 @@ const letraGrisStyle = {
 class Home extends Component {
     render() {
         return (
-        <div>
+        <Grid>
             <Row>
-                <Col md={6} style={letraGrandeStyle}>
+                <Col xs={6} md={6} style={letraGrandeStyle}>
                     XXII
                 </Col>
-                <Col md={6} style={letraMedianaStyle}>
+                <Col xs={6} md={6} style={letraMedianaStyle}>
                     CONGRESO<br />
                     INTERNACIONAL DE<br />
                     GESTIÓN HUMANA
@@ -53,9 +53,9 @@ class Home extends Component {
                 MÁS DE 20 MESAS REDONDAS CON EXPERTOS DE LA REGIÓN
             </Row>
             <Row>
-                <Link to="/signup" style={{align: 'center'}}><Button>Registrarse</Button></Link>
+                <Link to="/signup" style={{display: 'inline-block'}}><Button>Registrarse</Button></Link>
             </Row>
-        </div>);
+        </Grid>);
     }
 }
 
