@@ -11,11 +11,10 @@ class Mesas extends Component {
 
   }
   render() {
-    console.log(this.props.mesasSeleccionadas);
       var mesasItems = this.props.mesas.map((mesa) => 
           <Col xs={12} md={6} key={mesa.id}>
               <MesaItem {...mesa}
-                seleccionado={this.props.mesasSeleccionadas.map((m) => m ? m.id : null).indexOf(mesa.id) > -1}
+                seleccionado={this.props.mesasSeleccionadas.indexOf(mesa.id) > -1}
                 seleccionar={this.props.seleccionarMesa} />
           </Col>);
 

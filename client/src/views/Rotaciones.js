@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {Button, Col, Row, Grid, Glyphicon, Modal} from 'react-bootstrap';
 import Mesas from './Mesas';
+import utils from '../utils';
 
 const itemStyle = {
     background: '#eee',
@@ -36,9 +37,7 @@ const RotacionItem = function({index, mesa, onShow}) {
 class Rotaciones extends Component {
     constructor(props) {
         super(props);
-        if (!this.state) {
-            this.state = {mesasSeleccionadas: [null, null, null, null, null]};
-        }
+        this.state = {mesasSeleccionadas: [null, null, null, null, null], mesas: []};
     }
     fetchMesas = async () => {
         const response = await fetch('/api/mesas');
@@ -47,8 +46,11 @@ class Rotaciones extends Component {
         this.setState({mesas: mesas});
     }
     componentDidMount() {
+        utils.checkHayEstado(this);
+        if (!this.state.mesasSeleccionadas) {
+            this.setState({mesasSeleccionadas: [null, null, null, null, null]});
+        }
         this.fetchMesas();
-        console.log('hola')
     }
     onShow(index) {
         this.setState({ show: true, indexActual: index });
@@ -58,11 +60,11 @@ class Rotaciones extends Component {
     }
     seleccionarMesa(mesa) {
         const mesasSeleccionadas = Array.from(this.state.mesasSeleccionadas);
-        mesasSeleccionadas[this.state.indexActual] = mesa;
+        mesasSeleccionadas[this.state.indexActual] = mesa.id;
         this.setState({show: false, mesasSeleccionadas: mesasSeleccionadas});
+        console.log(this.state);
     }
     render() {
-
         return (
             <Grid>
                 <h4>Elija los temas de su interés</h4>
@@ -71,7 +73,7 @@ class Rotaciones extends Component {
                         const offset = index === 3 ? 2 : 0;
                         return (
                             <Col md={4} mdOffset={offset} key={index}>
-                                <RotacionItem index={index} mesa={mesa} onShow={this.onShow.bind(this, index)} />
+                                <RotacionItem index={index} mesa={this.state.mesas.find((m) => m.id === mesa)} onShow={this.onShow.bind(this, index)} />
                             </Col>)
                     })}
                 </Row>

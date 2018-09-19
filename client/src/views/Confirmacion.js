@@ -15,16 +15,19 @@ function DatoIngresado({nombre, valor}) {
 class Confirmacion extends Component {
     componentDidMount() {
         utils.checkHayEstado(this);
-        console.log(this.state)
     }
     render() {
         const state = this.props.location.state;
-        console.log(state);
         const mesasSeleccionadas = (
             <div>
                 {state.mesasSeleccionadas.map((m) => {
-                    const mesa = state.mesas.find((i) => i.id === m);
-                    return <p>{mesa ? mesa.topico : ""}</p>
+                    const mesa = state.mesas.find((mesa) => mesa.id == m);
+                    if(mesa){
+                        return <p key={mesa.id}>{mesa.topico}</p>
+                    }
+                    else {
+                        return <div></div>
+                    }
                 })}
             </div>
         );

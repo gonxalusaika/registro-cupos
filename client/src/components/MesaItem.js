@@ -33,7 +33,6 @@ class MesaItem extends React.Component {
         }**/
     }
     render() {
-        console.log(this.props.seleccionado);
         const popover = (
             <Popover id="modal-{this.props.id}">{this.props.descripcion}</Popover>
         );
