@@ -22,17 +22,18 @@ const botonStyle = {
 class MesaItem extends React.Component {
     constructor(props) {
         super(props);
-        console.log('en constructor: ' + this.props.seleccionado)
     }
     onSeleccionar() {
-        if (this.props.seleccionado) {
+        this.props.seleccionar(this.props);
+        /**if (this.props.seleccionado) {
             this.props.deseleccionar(this.props.id);
         }
         else {
             this.props.seleccionar(this.props.id);
-        }
+        }**/
     }
     render() {
+        console.log(this.props.seleccionado);
         const popover = (
             <Popover id="modal-{this.props.id}">{this.props.descripcion}</Popover>
         );

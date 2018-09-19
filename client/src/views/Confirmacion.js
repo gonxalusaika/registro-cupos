@@ -22,9 +22,10 @@ class Confirmacion extends Component {
         console.log(state);
         const mesasSeleccionadas = (
             <div>
-                {state.mesasSeleccionadas.map((mesa) => (
-                    <p>{state.mesas.find((i) => i.id === mesa).topico}</p>
-                ))}
+                {state.mesasSeleccionadas.map((m) => {
+                    const mesa = state.mesas.find((i) => i.id === m);
+                    return <p>{mesa ? mesa.topico : ""}</p>
+                })}
             </div>
         );
         const contactos = (

@@ -89,7 +89,7 @@ class Signup extends Component {
                 </FormGroup>
             </Form>
             <br />
-            <Link to={{pathname:"/mesas", state:this.state}} style={{float: 'right'}}><Button bsStyle='primary' bsSize='large'>Siguiente</Button></Link>
+            <Link to={{pathname:"/rotaciones", state:this.state}} style={{float: 'right'}}><Button bsStyle='primary' bsSize='large'>Siguiente</Button></Link>
         </Grid>);
     }
 }
