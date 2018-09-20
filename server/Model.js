@@ -40,12 +40,14 @@ const Mesa = sequelize.define('mesa', {
     type: Sequelize.STRING
   },
   descripcion: {
-    type: Sequelize.STRING
+    type: Sequelize.TEXT
   }
 });
 
 const Inscripcion = sequelize.define('inscripcion', {
-
+  rotacion: {
+    type: Sequelize.INTEGER
+  }
 });
 Mesa.hasMany(Inscripcion);
 Interesado.hasMany(Inscripcion);

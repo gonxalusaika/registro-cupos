@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const modelo = require('./Model');
 const MesasService = require('./service/MesasService');
+const properties = require('./properties');
 
 router.get('/mesas', async function(req, res) {
   const mesas = await MesasService.getMesasConCupos();
@@ -22,5 +23,9 @@ router.get('/inscripcion', function(req, res) {
     })
     ;
 });
+
+router.get('/properties', function(req, res) {
+    res.json(properties);
+})
 
 module.exports = router;

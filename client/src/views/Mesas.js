@@ -10,42 +10,18 @@ class Mesas extends Component {
     this.state = {mesas: [], mesasSeleccionadas: []};
 
   }
-  componentDidMount() {
-    if (utils.checkHayEstado(this)) {
-      this.fetchMesas();
-    }
-  }
-  fetchMesas = async () => {
-    const response = await fetch('/api/mesas');
-    const mesas = await response.json();
-    console.log(mesas);
-    this.setState({mesas: mesas});
-  }
-  seleccionarMesa(mesa) {
-    this.setState((state, props) => ({mesasSeleccionadas: [...state.mesasSeleccionadas, mesa]}));
-  }
-  deseleccionarMesa(mesa) {
-    this.setState((state, props) => ({mesasSeleccionadas: this.state.mesasSeleccionadas.filter((item) => item !== mesa)}));
-  }
   render() {
-      var mesasItems = this.state.mesas.map((mesa) => 
+      var mesasItems = this.props.mesas.map((mesa) => 
           <Col xs={12} md={6} key={mesa.id}>
               <MesaItem {...mesa}
-                seleccionado={this.state.mesasSeleccionadas.indexOf(mesa.id) > -1}
-                seleccionar={this.seleccionarMesa.bind(this)}
-                deseleccionar={this.deseleccionarMesa.bind(this)} />
+                seleccionado={this.props.mesasSeleccionadas.indexOf(mesa.id) > -1}
+                seleccionar={this.props.seleccionarMesa} />
           </Col>);
 
       return (
       <Grid>
-          <h4>Seleccione 5 mesas de su preferencia</h4>
           <Row>
             {mesasItems}
-          </Row>
-          <Row>
-            <Link to={{pathname:"/confirmacion", state:this.state}} style={{float: 'right'}}>
-              <Button bsStyle='primary' bsSize='large'>Siguiente</Button>
-            </Link>
           </Row>
       </Grid>);
   }
