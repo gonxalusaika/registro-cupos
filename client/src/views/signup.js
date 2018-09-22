@@ -43,6 +43,17 @@ class Signup extends Component {
             this.setState((state, props) => ({contacto: this.state.contacto.filter((item) => item !== contacto)}));
         }
     }
+    proximoState() {
+        return {
+            datosPersonales: {
+                email: this.state.email,
+                nombre: this.state.nombre,
+                organizacion: this.state.organizacion,
+                usuario: this.state.usuario,
+                contacto: this.state.contacto
+            }
+        }
+    }
     render() {
         const contactos = ['Celular', 'Email', 'Linkedin', 'Otro'].map((contacto) => {
             return (
@@ -89,7 +100,7 @@ class Signup extends Component {
                 </FormGroup>
             </Form>
             <br />
-            <Link to={{pathname:"/rotaciones", state:this.state}} style={{float: 'right'}}><Button bsStyle='primary' bsSize='large'>Siguiente</Button></Link>
+            <Link to={{pathname:"/rotaciones", state:this.proximoState()}} style={{float: 'right'}}><Button bsStyle='primary' bsSize='large'>Siguiente</Button></Link>
         </Grid>);
     }
 }

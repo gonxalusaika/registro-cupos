@@ -13,11 +13,36 @@ function DatoIngresado({nombre, valor}) {
 }
 
 class Confirmacion extends Component {
+    constructor(props){
+        super(props);
+        this.state = {mesasSeleccionadas:[], datosPersonales: {contacto:[]}};
+    }
     componentDidMount() {
         utils.checkHayEstado(this);
     }
+    confirmarInscripcion = async () =>  {
+        const body = {
+            datosPersonales: this.state.datosPersonales,
+            rotaciones: this.state.mesasSeleccionadas
+        }
+        fetch('/api/inscripcion', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+        .then((resJson) => {
+            alert('Respuesta: ' + resJson);
+            resJson.json()
+            .then((res) => alert(res));
+        })
+        .catch((err) => {
+            alert('Error: ' + err);
+        });
+    }
     render() {
-        const state = this.props.location.state;
+        const state = this.state;
         const mesasSeleccionadas = (
             <div>
                 {state.mesasSeleccionadas.map((m) => {
@@ -33,7 +58,7 @@ class Confirmacion extends Component {
         );
         const contactos = (
             <div>
-                {state.contacto.map((contacto) => (
+                {state.datosPersonales.contacto.map((contacto) => (
                   <p>{contacto}</p>  
                 ))}
             </div>
@@ -41,16 +66,15 @@ class Confirmacion extends Component {
         return (
         <Grid>
             <h4>Confirme que los datos ingresados son correctos</h4>
-            <DatoIngresado nombre="Nombre" valor={state.nombre} />
-            <DatoIngresado nombre="Email" valor={state.email} />
-            <DatoIngresado nombre="Organización" valor={state.organizacion} />
-            <DatoIngresado nombre="Usuario" valor={state.usuario} />
+            {state.mesasSeleccionadas}
+            <DatoIngresado nombre="Nombre" valor={state.datosPersonales.nombre} />
+            <DatoIngresado nombre="Email" valor={state.datosPersonales.email} />
+            <DatoIngresado nombre="Organización" valor={state.datosPersonales.organizacion} />
+            <DatoIngresado nombre="Usuario" valor={state.datosPersonales.usuario} />
             <DatoIngresado nombre="Forma de contacto" valor={contactos} />
             <DatoIngresado nombre="Mesas" valor={mesasSeleccionadas} />
             <Row>
-                <Link to={{pathname:"/confirmacion", state:this.state}} style={{float: 'right'}}>
-                <Button bsStyle='primary' bsSize='large'>Confirmar</Button>
-                </Link>
+                <Button bsStyle='primary' bsSize='large' onClick={this.confirmarInscripcion.bind(this)}>Confirmar</Button>
             </Row>
         </Grid>)
     }

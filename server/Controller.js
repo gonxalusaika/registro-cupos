@@ -8,18 +8,25 @@ router.get('/mesas', async function(req, res) {
   res.json(mesas);
 });
 
-router.get('/inscripcion', function(req, res) {
+router.post('/inscripcion', function(req, res) {
     modelo.sequelize.transaction((tr) => {
-        return modelo.Interesado.create({
-            email: 'pepe@pepe.com',
-            nombre: 'Pepe de la gente'
-        }, {transaction: tr})
+        req.body.datosPersonales.contacto = req.body.datosPersonales.contacto.join();
+        return modelo.Interesado.create(req.body.datosPersonales, {transaction: tr})
         .then((interesado) => {
-            return modelo.Inscripcion.create({
-                interesadoId: interesado.id,
-                mesaId: 3
-            }, {transaction: tr})
-        });
+            const rotacionPromises = [];
+            req.body.rotaciones.forEach((seleccion, index) => {
+                rotacionPromises.push(modelo.Inscripcion.create({
+                    mesaId: seleccion,
+                    interesadoId: interesado.id,
+                    rotacion: index+1
+                }, {transaction: tr}))
+
+            });
+            return Promise.all(rotacionPromises)
+            .then(() => {
+                res.json({hola: 'hola'})
+            });
+        })
     })
     ;
 });

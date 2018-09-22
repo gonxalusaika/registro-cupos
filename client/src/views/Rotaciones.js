@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import {Button, Col, Row, Grid, Glyphicon, Modal} from 'react-bootstrap';
 import Mesas from './Mesas';
 import utils from '../utils';
@@ -64,6 +63,15 @@ class Rotaciones extends Component {
         this.setState({show: false, mesasSeleccionadas: mesasSeleccionadas});
         console.log(this.state);
     }
+    siguientePantalla() {
+        if (this.state.mesasSeleccionadas.indexOf(null) > -1)
+        {
+            alert('Debe llenar todas las rotaciones antes de continuar');
+        }
+        else {
+            this.props.history.push({pathname:"/confirmacion", state:this.state});
+        }
+    }
     render() {
         return (
             <Grid>
@@ -85,7 +93,7 @@ class Rotaciones extends Component {
                         <Mesas mesas={this.state.mesas} mesasSeleccionadas={this.state.mesasSeleccionadas} seleccionarMesa={this.seleccionarMesa.bind(this)} />
                     </Modal.Body>
                 </Modal>
-                <Link to={{pathname:"/confirmacion", state:this.state}} style={{float: 'right'}}><Button bsStyle='primary' bsSize='large'>Siguiente</Button></Link>
+                <Button bsStyle='primary' bsSize='large' style={{float: 'right'}} onClick={this.siguientePantalla.bind(this)}>Siguiente</Button>
             </Grid>
         )
     }

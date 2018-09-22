@@ -1,4 +1,5 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const cowsay = require('cowsay')
 const cors = require('cors')
 require('./server/Model');
@@ -6,6 +7,8 @@ const controller = require('./server/Controller');
 
 // Create the server
 const app = express();
+
+app.use(bodyParser.json());
 
 app.use('/api', controller);
 // Serve our api route /cow that returns a custom talking text cow
