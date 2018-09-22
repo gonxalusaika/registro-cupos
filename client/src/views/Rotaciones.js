@@ -5,10 +5,11 @@ import utils from '../utils';
 
 const itemStyle = {
     background: '#eee',
-    padding: '30px',
+    padding: '25px',
     marginBottom: '15px',
     boxShadow: '0 0 2px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22)',
-    textAlign: 'center'
+    textAlign: 'center',
+    height: '170px'
 };
 
 const RotacionItem = function({index, mesa, onShow}) {
@@ -76,6 +77,8 @@ class Rotaciones extends Component {
         return (
             <Grid>
                 <h4>Elija los temas de su interés</h4>
+                <p>El congreso se llevará a cabo en rotaciones de... <i>¿cuantos minutos?</i>. Tenga en cuenta que un tópico puede no estar disponible, pero estar disponible en otras</p>
+                <br />
                 <Row>
                     {this.state.mesasSeleccionadas.map((mesa, index) => {
                         const offset = index === 3 ? 2 : 0;
@@ -90,7 +93,7 @@ class Rotaciones extends Component {
                         <Modal.Title>Seleccione una mesa</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Mesas mesas={this.state.mesas} mesasSeleccionadas={this.state.mesasSeleccionadas} seleccionarMesa={this.seleccionarMesa.bind(this)} />
+                        <Mesas mesas={this.state.mesas} rotacion={this.state.indexActual} mesasSeleccionadas={this.state.mesasSeleccionadas} seleccionarMesa={this.seleccionarMesa.bind(this)} />
                     </Modal.Body>
                 </Modal>
                 <Button bsStyle='primary' bsSize='large' style={{float: 'right'}} onClick={this.siguientePantalla.bind(this)}>Siguiente</Button>

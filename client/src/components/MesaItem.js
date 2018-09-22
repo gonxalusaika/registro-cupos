@@ -5,7 +5,8 @@ const generalStyle = {
     background: '#eee',
     padding: '20px',
     marginBottom: '15px',
-    boxShadow: '0 0 2px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22)'
+    boxShadow: '0 0 2px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22)',
+    wordWrap: 'break-word'
 };
 
 const botonSeleccionableStyle = (mesa) => {
@@ -30,23 +31,26 @@ class MesaItem extends React.Component {
         super(props);
     }
     onSeleccionar() {
-        this.props.seleccionar(this.props);
-        /**if (this.props.seleccionado) {
-            this.props.deseleccionar(this.props.id);
+        if (this.props.cupos > 0) {
+            this.props.seleccionar(this.props);
         }
-        else {
-            this.props.seleccionar(this.props.id);
-        }**/
     }
     render() {
-        const popover = (
-            <Popover id="modal-{this.props.id}">{this.props.descripcion}</Popover>
-        );
+        const popoverDescripcion = <Popover id={"modal-descripcion-" + this.props.id}>{this.props.descripcion}</Popover>
+        const popoverCupos = (
+            <Popover id={"modal-cupos-" + this.props.id}>
+                {this.props.todosCupos.map((cupo, index) => <p>Rotación {index+1}: {cupo}</p>)}
+            </Popover>
+        )
+        const estilo = this.props.seleccionado ? 'info' : 'default';
+
         return <div style={generalStyle}>
             <h4>{this.props.topico}</h4>
-            <div style={cuposStyle}>Cupos: 50</div>
-            <Button style={botonSeleccionableStyle(this.props)} onClick={this.onSeleccionar.bind(this)} >Seleccionar</Button>
-            <OverlayTrigger overlay={popover} placement="bottom">
+            <OverlayTrigger overlay={popoverCupos} placement="bottom">
+                <div style={cuposStyle}>Cupos: {this.props.cupos}</div>
+            </OverlayTrigger>
+            <Button style={botonSeleccionableStyle(this.props)} onClick={this.onSeleccionar.bind(this)} bsStyle={estilo} disabled={this.props.cupos <= 0} >Seleccionar</Button>
+            <OverlayTrigger overlay={popoverDescripcion} placement="bottom">
                 <Button style={botonStyle}>Detalles</Button>
             </OverlayTrigger>
         </div>;

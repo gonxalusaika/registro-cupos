@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 
 function FieldGroup({ id, label, help, ...props }) {
     return (
-      <FormGroup controlId={id}>
+      <FormGroup controlId={id} style={{paddingTop: '10px'}}>
         <Col componentClass={ControlLabel} md={3}>
             {label}
         </Col>

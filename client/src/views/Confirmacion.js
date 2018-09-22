@@ -33,12 +33,14 @@ class Confirmacion extends Component {
             body: JSON.stringify(body)
         })
         .then((resJson) => {
-            alert('Respuesta: ' + resJson);
             resJson.json()
-            .then((res) => alert(res));
+            .then((res) =>{
+                console.log(res);
+                this.props.history.push({pathname:"/resumen", state:{...res, mesas:this.state.mesas}});
+            });
         })
         .catch((err) => {
-            alert('Error: ' + err);
+            alert('Ha ocurrido un error al completar su inscripcion. Por favor, intente mas tarde');
         });
     }
     render() {
@@ -46,7 +48,7 @@ class Confirmacion extends Component {
         const mesasSeleccionadas = (
             <div>
                 {state.mesasSeleccionadas.map((m) => {
-                    const mesa = state.mesas.find((mesa) => mesa.id == m);
+                    const mesa = state.mesas.find((mesa) => mesa.id === m);
                     if(mesa){
                         return <p key={mesa.id}>{mesa.topico}</p>
                     }
@@ -59,22 +61,23 @@ class Confirmacion extends Component {
         const contactos = (
             <div>
                 {state.datosPersonales.contacto.map((contacto) => (
-                  <p>{contacto}</p>  
+                  <p><small>{contacto}</small></p>  
                 ))}
             </div>
         );
         return (
         <Grid>
             <h4>Confirme que los datos ingresados son correctos</h4>
-            {state.mesasSeleccionadas}
             <DatoIngresado nombre="Nombre" valor={state.datosPersonales.nombre} />
             <DatoIngresado nombre="Email" valor={state.datosPersonales.email} />
             <DatoIngresado nombre="Organización" valor={state.datosPersonales.organizacion} />
             <DatoIngresado nombre="Usuario" valor={state.datosPersonales.usuario} />
             <DatoIngresado nombre="Forma de contacto" valor={contactos} />
-            <DatoIngresado nombre="Mesas" valor={mesasSeleccionadas} />
+            <div style={{marginTop:'10px'}} >
+                <DatoIngresado nombre="Mesas" valor={mesasSeleccionadas} />
+            </div>
             <Row>
-                <Button bsStyle='primary' bsSize='large' onClick={this.confirmarInscripcion.bind(this)}>Confirmar</Button>
+                <Button bsStyle='primary' bsSize='large' style={{float: 'right'}} onClick={this.confirmarInscripcion.bind(this)}>Confirmar</Button>
             </Row>
         </Grid>)
     }

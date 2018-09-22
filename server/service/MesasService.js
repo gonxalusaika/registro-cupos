@@ -1,17 +1,27 @@
 const modelo = require('../Model');
 const Sequelize = require('sequelize');
 const sequelize = modelo.sequelize;
+const properties = require('../properties');
 
 exports.getMesasConCupos = async () => {
   const mesas = await modelo.Mesa.findAll({
-    attributes: { 
-      include: [[Sequelize.fn("COUNT", Sequelize.col("inscripcions.id")), "inscripciones"]] 
-    },
     include: [{
       model: modelo.Inscripcion,
-      attributes: []
-    }],
-    group: ['mesa.id', 'inscripcions.id']
+      attributes: ['rotacion']
+    }]
   });
-  return mesas;
+
+  const mesasResult = [];
+
+  mesas.forEach((mesa) => {
+    const mesaR = mesa.toJSON();
+    mesaR.cupos = [];
+    mesaR.inscripcions = undefined;
+    for (let index = 0; index < properties.cantRotaciones; index ++) {
+      mesaR.cupos.push(properties.cuposPorRotacion - mesa.inscripcions.filter(inscripcion => inscripcion.rotacion === index+1).length);
+    }
+    mesasResult.push(mesaR);
+  });
+
+  return mesasResult;
 };

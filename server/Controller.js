@@ -5,6 +5,7 @@ const properties = require('./properties');
 
 router.get('/mesas', async function(req, res) {
   const mesas = await MesasService.getMesasConCupos();
+  console.log('devolviendo cupos')
   res.json(mesas);
 });
 
@@ -24,7 +25,7 @@ router.post('/inscripcion', function(req, res) {
             });
             return Promise.all(rotacionPromises)
             .then(() => {
-                res.json({hola: 'hola'})
+                res.json(req.body)
             });
         })
     })

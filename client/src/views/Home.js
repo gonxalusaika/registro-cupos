@@ -45,6 +45,7 @@ class Home extends Component {
                 <b>18 Y 19 DE OCTUBRE DE 2018</b><br />
                 HOTEL SHERATON MONTEVIDEO
             </Row>
+            <br />
             <Row style={letraGrisStyle}>
                 4 CONFERENCISTAS INTERNACIONALES <br />
                 6 TALLERES TEÓRICO-PRÁCTICO <br />
@@ -52,8 +53,8 @@ class Home extends Component {
                 ACTIVIDADES RECREATIVAS Y SOCIALES<br />
                 MÁS DE 20 MESAS REDONDAS CON EXPERTOS DE LA REGIÓN
             </Row>
-            <Row>
-                <Link to="/signup" style={{display: 'inline-block'}}><Button>Registrarse</Button></Link>
+            <Row style={{textAlign: 'center', marginTop: '20px'}}>
+                <Link to="/signup"><Button bsSize='large' bsStyle='primary'>Registrarse</Button></Link>
             </Row>
         </Grid>);
     }
