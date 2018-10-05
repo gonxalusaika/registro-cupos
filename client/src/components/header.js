@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import {Image, Col} from 'react-bootstrap';
+import {Image, Col, Grid} from 'react-bootstrap';
 
 const tituloStyle = {
-    paddingTop: '20px',
     color: '#449'
 }
 const headerStyle = {
@@ -14,14 +13,14 @@ const headerStyle = {
 class Header extends Component {
     render() {
         return (
-        <div style={headerStyle}>
-            <Col md={6}>
+        <Grid style={headerStyle}>
+            <Col md={6} sm={6} style={{marginTop: '10px', marginBottom: '10px'}}>
+                <Image src="img/adpugh-logo.png" responsive style={{maxWidth:'40%', justifyContent:'flex-end'}} />
+            </Col>
+            <Col md={6} sm={6}>
                 <h2 style={tituloStyle}>EL <b>FUTURO</b> DEL <b>TRABAJO</b></h2>
             </Col>
-            <Col md={6}>
-                <Image src="img/adpugh-logo.png" responsive />
-            </Col>
-        </div>
+        </Grid>
         );
     }
 }

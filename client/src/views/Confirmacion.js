@@ -12,6 +12,8 @@ function DatoIngresado({nombre, valor}) {
     );
 }
 
+let seEstaMandando = false;
+
 class Confirmacion extends Component {
     constructor(props){
         super(props);
@@ -21,27 +23,30 @@ class Confirmacion extends Component {
         utils.checkHayEstado(this);
     }
     confirmarInscripcion = async () =>  {
-        const body = {
-            datosPersonales: this.state.datosPersonales,
-            rotaciones: this.state.mesasSeleccionadas
-        }
-        fetch('/api/inscripcion', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
-        })
-        .then((resJson) => {
-            resJson.json()
-            .then((res) =>{
-                console.log(res);
-                this.props.history.push({pathname:"/resumen", state:{...res, mesas:this.state.mesas}});
+        if (!seEstaMandando) {
+            seEstaMandando = true;
+            const body = {
+                datosPersonales: this.state.datosPersonales,
+                rotaciones: this.state.mesasSeleccionadas
+            }
+            fetch('/api/inscripcion', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            })
+            .then((resJson) => {
+                resJson.json()
+                .then((res) =>{
+                    console.log(res);
+                    this.props.history.push({pathname:"/resumen", state:{...res, mesas:this.state.mesas}});
+                });
+            })
+            .catch((err) => {
+                alert('Ha ocurrido un error al completar su inscripcion. Por favor, intente mas tarde');
             });
-        })
-        .catch((err) => {
-            alert('Ha ocurrido un error al completar su inscripcion. Por favor, intente mas tarde');
-        });
+        }
     }
     render() {
         const state = this.state;
@@ -77,7 +82,7 @@ class Confirmacion extends Component {
                 <DatoIngresado nombre="Mesas" valor={mesasSeleccionadas} />
             </div>
             <Row>
-                <Button bsStyle='primary' bsSize='large' style={{float: 'right'}} onClick={this.confirmarInscripcion.bind(this)}>Confirmar</Button>
+                <Button bsStyle='primary' bsSize='large' style={{float: 'right'}} disabled={seEstaMandando} onClick={this.confirmarInscripcion.bind(this)}>Confirmar</Button>
             </Row>
         </Grid>)
     }

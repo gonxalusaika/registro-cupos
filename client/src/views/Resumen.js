@@ -19,10 +19,10 @@ class Resumen extends Component {
                 <h3>¡Muchas gracias por inscribirse!</h3>
                 <p>Este es su cronograma para el congreso:</p>
                 <div style={{paddingTop: '20px'}}>
-                    {this.mesasSeleccionadas().map((mesa) => {
+                    {this.mesasSeleccionadas().map((mesa, index) => {
                         return (
                             <Row>
-                                <Col md={5} style={{textAlign: 'right'}}>10:30</Col>
+                                <Col md={5} style={{textAlign: 'right'}}>{index+1}</Col>
                                 <Col md={7}><b>{mesa.topico}</b></Col>
                             </Row>
                         );

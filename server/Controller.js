@@ -11,7 +11,8 @@ router.get('/mesas', async function(req, res) {
 
 router.post('/inscripcion', function(req, res) {
     modelo.sequelize.transaction((tr) => {
-        req.body.datosPersonales.contacto = req.body.datosPersonales.contacto.join();
+        //req.body.datosPersonales.contacto = req.body.datosPersonales.contacto.join();
+        req.body.datosPersonales.email = req.body.datosPersonales.email.toLowerCase();
         return modelo.Interesado.create(req.body.datosPersonales, {transaction: tr})
         .then((interesado) => {
             const rotacionPromises = [];
@@ -30,6 +31,12 @@ router.post('/inscripcion', function(req, res) {
         })
     })
     ;
+});
+
+router.get('/validacion/email/:email', async function(req, res) {
+    res.json({
+        valido: await MesasService.emailSePuedeUsar(req.params.email)
+    });
 });
 
 router.get('/properties', function(req, res) {

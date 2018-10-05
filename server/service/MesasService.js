@@ -25,3 +25,12 @@ exports.getMesasConCupos = async () => {
 
   return mesasResult;
 };
+
+exports.emailSePuedeUsar = async (email) => {
+  const interesadoList = await modelo.Interesado.findAll({
+    where: {
+      email: email.toLowerCase()
+    }
+  });
+  return interesadoList.length === 0;
+}

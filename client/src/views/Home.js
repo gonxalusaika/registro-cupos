@@ -31,7 +31,7 @@ class Home extends Component {
     render() {
         return (
         <Grid>
-            <Row>
+            <Row style={{padding: '30px'}}>
                 <Col xs={6} md={6} style={letraGrandeStyle}>
                     XXII
                 </Col>
@@ -42,18 +42,14 @@ class Home extends Component {
                 </Col>
             </Row>
             <Row style={letraAzulStyle}>
-                <b>18 Y 19 DE OCTUBRE DE 2018</b><br />
+                <b>19 DE OCTUBRE DE 2018</b><br />
                 HOTEL SHERATON MONTEVIDEO
             </Row>
             <br />
             <Row style={letraGrisStyle}>
-                4 CONFERENCISTAS INTERNACIONALES <br />
-                6 TALLERES TEÓRICO-PRÁCTICO <br />
-                PANELES DE INTERACTIVOS<br />
-                ACTIVIDADES RECREATIVAS Y SOCIALES<br />
-                MÁS DE 20 MESAS REDONDAS CON EXPERTOS DE LA REGIÓN
+                ELECCIÓN DE MESAS REDONDAS
             </Row>
-            <Row style={{textAlign: 'center', marginTop: '20px'}}>
+            <Row style={{textAlign: 'center', marginTop: '50px'}}>
                 <Link to="/signup"><Button bsSize='large' bsStyle='primary'>Registrarse</Button></Link>
             </Row>
         </Grid>);
