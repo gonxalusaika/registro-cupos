@@ -2,6 +2,7 @@ const router = require('express').Router();
 const modelo = require('./Model');
 const MesasService = require('./service/MesasService');
 const properties = require('./properties');
+const csv = require('csv-express');
 
 router.get('/mesas', async function(req, res) {
   const mesas = await MesasService.getMesasConCupos();
@@ -41,6 +42,19 @@ router.get('/validacion/email/:email', async function(req, res) {
 
 router.get('/properties', function(req, res) {
     res.json(properties);
+});
+
+router.get('/admin/inscripciones', async function(req, res) {
+    const inscripciones = await MesasService.getInscripciones();
+    const inscripcionesPlanas = inscripciones.map((inscripcion) => {
+        return {
+            nombre: inscripcion.interesado.nombre,
+            email: inscripcion.interesado.email,
+            mesa: inscripcion.mesa.topico,
+            rotacion: inscripcion.rotacion
+        }
+    })
+    res.csv(inscripcionesPlanas, true);
 })
 
 module.exports = router;

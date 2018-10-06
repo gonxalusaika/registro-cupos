@@ -34,3 +34,12 @@ exports.emailSePuedeUsar = async (email) => {
   });
   return interesadoList.length === 0;
 }
+
+exports.getInscripciones = async () => {
+  const inscripciones = await modelo.Inscripcion.findAll({
+    include: [
+      modelo.Interesado, modelo.Mesa
+    ]
+  });
+  return inscripciones;
+}
