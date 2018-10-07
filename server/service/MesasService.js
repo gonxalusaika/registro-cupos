@@ -2,6 +2,7 @@ const modelo = require('../Model');
 const Sequelize = require('sequelize');
 const sequelize = modelo.sequelize;
 const properties = require('../properties');
+const emailService = require('./emailService');
 
 exports.getMesasConCupos = async () => {
   const mesas = await modelo.Mesa.findAll({
@@ -42,4 +43,14 @@ exports.getInscripciones = async () => {
     ]
   });
   return inscripciones;
+}
+
+exports.enviarEmailRegistro = async (datosPersonales, rotaciones) => {
+  const mesas = await modelo.Mesa.findAll({
+    attributes: ['id', 'topico']
+  });
+
+  const mesasElegidas = rotaciones.map((rotacion) => mesas.find((mesa) => mesa.id === rotacion));
+
+  emailService.enviarEmailRegistro(datosPersonales, mesasElegidas);
 }

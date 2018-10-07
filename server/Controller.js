@@ -25,6 +25,7 @@ router.post('/inscripcion', function(req, res) {
                 }, {transaction: tr}))
 
             });
+            MesasService.enviarEmailRegistro(req.body.datosPersonales, req.body.rotaciones);
             return Promise.all(rotacionPromises)
             .then(() => {
                 res.json(req.body)
@@ -54,6 +55,7 @@ router.get('/admin/inscripciones', async function(req, res) {
             rotacion: inscripcion.rotacion
         }
     })
+    res.setHeader('Content-disposition', 'attachment; filename=testing.csv');
     res.csv(inscripcionesPlanas, true);
 })
 
