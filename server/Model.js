@@ -37,10 +37,20 @@ const Interesado = sequelize.define('interesado', {
 
 const Mesa = sequelize.define('mesa', {
   topico: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    unique: true
   },
   descripcion: {
     type: Sequelize.TEXT
+  },
+  organizacion: {
+    type: Sequelize.STRING
+  },
+  moderador: {
+    type: Sequelize.STRING
+  },
+  rol: {
+    type: Sequelize.STRING
   }
 });
 
@@ -56,7 +66,7 @@ Inscripcion.belongsTo(Mesa);
 
 sequelize.sync({force: false})
   .then(() => {
-    console.log('Base de datos creada');
+    console.log('BD iniciada');
   });
 
 module.exports = {

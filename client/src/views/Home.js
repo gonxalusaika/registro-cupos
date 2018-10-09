@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {Button, Col, Row, Grid} from 'react-bootstrap';
+import {Button, Col, Row, Grid, Image} from 'react-bootstrap';
 
 const letraGrandeStyle = {
     fontSize: '7rem',
@@ -30,8 +30,10 @@ const letraGrisStyle = {
 class Home extends Component {
     render() {
         return (
-        <Grid>
-            <Row style={{padding: '30px'}}>
+            <Grid>
+
+            <Image src="img/inicio.PNG" responsive style={{padding: '40px'}}/>
+            {/* <Row style={{padding: '30px'}}>
                 <Col xs={6} md={6} style={letraGrandeStyle}>
                     XXII
                 </Col>
@@ -48,11 +50,11 @@ class Home extends Component {
             <br />
             <Row style={letraGrisStyle}>
                 ELECCIÓN DE MESAS REDONDAS
-            </Row>
-            <Row style={{textAlign: 'center', marginTop: '50px'}}>
+            </Row> */}
+            <Row style={{textAlign: 'center'}}>
                 <Link to="/signup"><Button bsSize='large' bsStyle='primary'>Registrarse</Button></Link>
             </Row>
-        </Grid>);
+            </Grid>);
     }
 }
 

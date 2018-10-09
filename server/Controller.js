@@ -45,6 +45,16 @@ router.get('/properties', function(req, res) {
     res.json(properties);
 });
 
+router.post('/admin/mesas', async function(req, res) {
+    if ('123' !== req.get('Authorization')){
+        res.send('No se puede hacer');
+        res.status(400);
+    }
+    else {
+        const algo = await MesasService.cargarMesas(req.body, res);
+    }
+});
+
 router.get('/admin/inscripciones', async function(req, res) {
     const inscripciones = await MesasService.getInscripciones();
     const inscripcionesPlanas = inscripciones.map((inscripcion) => {
