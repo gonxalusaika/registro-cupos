@@ -67,6 +67,10 @@ exports.cargarMesas = async (datos, res) => {
         rol: data.Rol
       })
       .then((resultado) => {
+        console.log('Mesa creada ' + resultado);
+      })
+      .catch((err) => {
+        console.log(err);
       });
     })
     .on('end', () => {

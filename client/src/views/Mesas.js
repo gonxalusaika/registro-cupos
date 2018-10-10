@@ -8,10 +8,14 @@ class Mesas extends Component {
   }
   render() {
       var mesasItems = this.props.mesas.map((mesa) => 
-          <Col xs={12} md={6} key={mesa.id}>
+          <Col xs={12} md={6} sm={12} key={mesa.id}>
               <MesaItem {...mesa}
+                id={mesa.id}
                 topico={mesa.topico}
                 descripcion={mesa.descripcion}
+                moderador={mesa.moderador}
+                rol={mesa.rol}
+                organizacion={mesa.organizacion}
                 cupos={mesa.cupos[this.props.rotacion]}
                 todosCupos={mesa.cupos}
                 seleccionado={this.props.mesasSeleccionadas.indexOf(mesa.id) > -1}
@@ -19,11 +23,11 @@ class Mesas extends Component {
           </Col>);
 
       return (
-      <Grid>
-          <Row>
-            {mesasItems}
-          </Row>
-      </Grid>);
+        <Grid>
+            <Row>
+              {mesasItems}
+            </Row>
+        </Grid>);
   }
 }
 
