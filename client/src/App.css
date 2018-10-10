@@ -54,3 +54,9 @@ fondo {
   text-align: left;
   vertical-align: middle;
 }
+
+@media (min-width: 992px) {
+  .elemento-mesa {
+    height: 190px;
+  }
+}

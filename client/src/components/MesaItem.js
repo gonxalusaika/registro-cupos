@@ -51,12 +51,28 @@ class MesaItem extends React.Component {
         )
         const estilo = this.props.seleccionado ? 'info' : 'primary';
 
-        return <div style={generalStyle} >
-            <h4>{this.props.topico}</h4>
+        const campoCupos = this.props.cupos ? (
             <OverlayTrigger overlay={popoverCupos} placement="bottom">
                 <div style={cuposStyle}>Cupos: {this.props.cupos}</div>
             </OverlayTrigger>
-            <Button style={botonSeleccionableStyle(this.props)} onClick={this.onSeleccionar.bind(this)} bsStyle={estilo} disabled={this.props.cupos <= 0} >Seleccionar</Button>
+        ) : <div />;
+
+        const botonSeleccionar = this.props.seleccionar ? (
+            <Button style={botonSeleccionableStyle(this.props)} 
+                onClick={this.onSeleccionar.bind(this)} bsStyle={estilo} 
+                disabled={this.props.cupos <= 0 || this.props.seleccionado} >
+                Seleccionar
+            </Button>
+        ) : <div />
+
+        return <div style={generalStyle} >
+            <h4>
+            {this.props.topico}
+            <br />
+            <small>{this.props.moderador} - {this.props.organizacion}</small>
+            </h4>
+            {campoCupos}
+            {botonSeleccionar}
             {/* <OverlayTrigger overlay={popoverDescripcion} placement="bottom"> */}
                 <Button onClick={this.onShow.bind(this)} style={botonStyle} bsSize='sm'>Detalles</Button>
             {/* </OverlayTrigger> */}
@@ -69,7 +85,7 @@ class MesaItem extends React.Component {
                   <Grid>
                   {this.props.descripcion}
                   <br />
-                  <small>{this.props.moderador} - {this.props.rol}</small>
+                  <small>{this.props.moderador} - {this.props.rol} - {this.props.organizacion}</small>
                   </Grid>
               </Modal.Body>
             </Modal>

@@ -76,8 +76,6 @@ class Confirmacion extends Component {
             <DatoIngresado nombre="Nombre" valor={state.datosPersonales.nombre} />
             <DatoIngresado nombre="Email" valor={state.datosPersonales.email} />
             <DatoIngresado nombre="Organización" valor={state.datosPersonales.organizacion} />
-            <DatoIngresado nombre="Usuario" valor={state.datosPersonales.usuario} />
-            <DatoIngresado nombre="Forma de contacto" valor={contactos} />
             <div style={{marginTop:'10px'}} >
                 <DatoIngresado nombre="Mesas" valor={mesasSeleccionadas} />
             </div>

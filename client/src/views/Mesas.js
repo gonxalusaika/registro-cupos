@@ -8,7 +8,7 @@ class Mesas extends Component {
   }
   render() {
       var mesasItems = this.props.mesas.map((mesa) => 
-          <Col xs={12} md={6} sm={12} key={mesa.id}>
+          <Col xs={12} md={6} sm={12} key={mesa.id} className='elemento-mesa'>
               <MesaItem {...mesa}
                 id={mesa.id}
                 topico={mesa.topico}
@@ -24,7 +24,7 @@ class Mesas extends Component {
 
       return (
         <Grid>
-            <Row>
+            <Row bsClass='row-eq-height'>
               {mesasItems}
             </Row>
         </Grid>);

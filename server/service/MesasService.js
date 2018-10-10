@@ -20,7 +20,11 @@ exports.getMesasConCupos = async () => {
     mesaR.cupos = [];
     mesaR.inscripcions = undefined;
     for (let index = 0; index < properties.cantRotaciones; index ++) {
-      mesaR.cupos.push(properties.cuposPorRotacion - mesa.inscripcions.filter(inscripcion => inscripcion.rotacion === index+1).length);
+      mesaR.cupos.push(
+        Math.max(
+          properties.cuposPorRotacion - mesa.inscripcions.filter(inscripcion => inscripcion.rotacion === index+1).length,
+          0
+        ));
     }
     mesasResult.push(mesaR);
   });

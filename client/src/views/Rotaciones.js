@@ -77,7 +77,9 @@ class Rotaciones extends Component {
         return (
             <Grid>
                 <h4>Elección de mesas redondas.</h4>
-                <p>La dinámica se llevará a cabo en 5 rotaciones de 30 minutos cada una.  Debe elegir 5 mesas de acuerdo a sus intereses.  Tenga que cuenta que cada mesa cuenta con un cupo disponible.</p>
+                <p>La dinámica se llevará a cabo en 5 rotaciones de 30 minutos cada una.
+                    Debe elegir 5 mesas de acuerdo a sus intereses.
+                    Tenga en cuenta que cada mesa tiene un cupo limitado.</p>
                 <br />
                 <Row>
                     {this.state.mesasSeleccionadas.map((mesa, index) => {

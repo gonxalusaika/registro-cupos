@@ -4,7 +4,8 @@ import Home from './views/Home';
 import Signup from './views/Signup';
 import Confirmacion from './views/Confirmacion';
 import Rotaciones from './views/Rotaciones';
-import Resumen from './views/Resumen'
+import Resumen from './views/Resumen';
+import ListaMesas from './views/ListaMesas';
 
 const Routes = () => (
      <BrowserRouter>
@@ -14,6 +15,7 @@ const Routes = () => (
                 <Route path="/rotaciones" component={Rotaciones} />
                 <Route path="/confirmacion" component={Confirmacion} />
                 <Route path="/resumen" component={Resumen} />
+                <Route path="/mesas" component={ListaMesas} />
             </div>
         </BrowserRouter>
     );

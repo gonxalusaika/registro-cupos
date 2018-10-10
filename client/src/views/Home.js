@@ -54,6 +54,13 @@ class Home extends Component {
             <Row style={{textAlign: 'center'}}>
                 <Link to="/signup"><Button bsSize='large' bsStyle='primary'>Registrarse</Button></Link>
             </Row>
+
+            <Row style={{textAlign: 'center', paddingTop:'40px'}}>
+                <Link to="/mesas" style={{marginTop:'30px', textAlign:'center'}}>
+                    Ver mesas disponibles
+                </Link>
+            </Row>
+
             </Grid>);
     }
 }
