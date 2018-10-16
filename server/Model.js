@@ -51,6 +51,9 @@ const Mesa = sequelize.define('mesa', {
   },
   rol: {
     type: Sequelize.STRING
+  },
+  indice: {
+    type: Sequelize.INTEGER
   }
 });
 

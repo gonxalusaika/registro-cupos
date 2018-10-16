@@ -7,6 +7,7 @@ const csv = require('fast-csv');
 
 exports.getMesasConCupos = async () => {
   const mesas = await modelo.Mesa.findAll({
+    order: [['indice', 'ASC']],
     include: [{
       model: modelo.Inscripcion,
       attributes: ['rotacion']
@@ -68,7 +69,8 @@ exports.cargarMesas = async (datos, res) => {
         descripcion: data.Descripcion,
         organizacion: data.Organizacion,
         moderador: data.Moderador,
-        rol: data.Rol
+        rol: data.Rol,
+        indice: data.Indice
       })
       .then((resultado) => {
         console.log('Mesa creada ' + resultado);
