@@ -51,7 +51,7 @@ class MesaItem extends React.Component {
         )
         const estilo = this.props.seleccionado ? 'info' : 'primary';
 
-        const campoCupos = this.props.cupos ? (
+        const campoCupos = this.props.cupos !== undefined ? (
             <OverlayTrigger overlay={popoverCupos} placement="bottom">
                 <div style={cuposStyle}>Cupos: {this.props.cupos}</div>
             </OverlayTrigger>

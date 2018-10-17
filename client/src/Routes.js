@@ -11,10 +11,10 @@ const Routes = () => (
      <BrowserRouter>
             <div style={{paddingTop:'20px'}}>
                 <Route exact path="/" component={Home} />
-                {/* <Route path="/signup" component={Signup} />
+                <Route path="/signup" component={Signup} />
                 <Route path="/rotaciones" component={Rotaciones} />
                 <Route path="/confirmacion" component={Confirmacion} />
-                <Route path="/resumen" component={Resumen} /> */}
+                <Route path="/resumen" component={Resumen} />
                 <Route path="/mesas" component={ListaMesas} />
             </div>
         </BrowserRouter>

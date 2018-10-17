@@ -32,6 +32,9 @@ const Interesado = sequelize.define('interesado', {
   },
   email: {
     type: Sequelize.STRING
+  },
+  organizacion: {
+    type: Sequelize.STRING
   }
 });
 

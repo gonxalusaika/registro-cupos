@@ -51,13 +51,13 @@ class Home extends Component {
             <Row style={letraGrisStyle}>
                 ELECCIÓN DE MESAS REDONDAS
             </Row> */}
-            {/* <Row style={{textAlign: 'center'}}>
+            <Row style={{textAlign: 'center'}}>
                 <Link to="/signup"><Button bsSize='large' bsStyle='primary'>Registrarse</Button></Link>
-            </Row> */}
+            </Row>
 
             <Row style={{textAlign: 'center', paddingTop:'40px'}}>
                 <Link to="/mesas" style={{marginTop:'30px', textAlign:'center'}}>
-                    <Button bsSize='large' bsStyle='primary'>Ver mesas disponibles</Button>
+                    Ver mesas disponibles
                 </Link>
             </Row>
 
