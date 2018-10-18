@@ -22,8 +22,8 @@ class Resumen extends Component {
                     {this.mesasSeleccionadas().map((mesa, index) => {
                         return (
                             <Row>
-                                <Col md={5} style={{textAlign: 'right'}}>{index+1}</Col>
-                                <Col md={7}><b>{mesa.topico}</b></Col>
+                                <Col md={1} style={{textAlign: 'right'}}>{index+1}</Col>
+                                <Col md={11}><b>{mesa.topico}</b></Col>
                             </Row>
                         );
                     })}
